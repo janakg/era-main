@@ -158,19 +158,20 @@ def run():
 
     # test_incorrect_pred = {'images': [], 'ground_truths': [], 'predicted_vals': []}
 
-    num_epochs = 24
-    max_lr_epoch = 5
+    num_epochs = 4
+    max_lr_epoch = 1
 
     model = ResNet18().to(device)
     optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-2)  # you can adjust learning rate as needed
     criterion = nn.CrossEntropyLoss() # reduction='none' // it can be sum also
 
-    LRMAX = get_lr(
-            model,
-            train_loader,
-            optimizer,
-            criterion,
-            device)
+    # LRMAX = get_lr(
+    #         model,
+    #         train_loader,
+    #         optimizer,
+    #         criterion,
+    #         device)
+    LRMAX = 2.54E-04
 
     print("LRMAX:", LRMAX)
 
