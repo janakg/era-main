@@ -1,11 +1,12 @@
+from __future__ import print_function
+
 import torch
 from tqdm import tqdm
-
-from __future__ import print_function
 
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import numpy as np
 
 import os
 os.environ['KMP_DUPLICATE_LIB_OK']='True' 
@@ -17,7 +18,7 @@ from torchsummary import summary
 from utils import *
 
 # model imported from a module
-from models import ResNet18
+from models.resnet import ResNet18
 
 import os
 os.environ['KMP_DUPLICATE_LIB_OK']='True' 
@@ -83,7 +84,6 @@ def test(model, device, test_loader, criterion):
     
     return test_succeeded, test_loss
 
-
 def get_lr(
     model,
     train_loader,
@@ -105,7 +105,8 @@ def get_lr(
         start_lr=start_lr,
         diverge_th=diverge_th,
     )
-    _, max_lr = lr_finder.plot(log_lr=False, suggest_lr=True)
+    _,max_lr = lr_finder.plot(log_lr=False, suggest_lr=True)
+    print("max_lr", max_lr)
 
     # Reset the model and optimizer to initial state
     lr_finder.reset()
@@ -113,11 +114,11 @@ def get_lr(
     return max_lr
 
 
-def run():
+def run_test():
     print("Run it")
 
 
-def main():
+def run():
     # CUDA?
     use_cuda = torch.cuda.is_available()
     print("CUDA Available?", use_cuda)
@@ -155,7 +156,7 @@ def main():
     train_acc = []
     test_acc = []
 
-    test_incorrect_pred = {'images': [], 'ground_truths': [], 'predicted_vals': []}
+    # test_incorrect_pred = {'images': [], 'ground_truths': [], 'predicted_vals': []}
 
     num_epochs = 24
     max_lr_epoch = 5

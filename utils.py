@@ -3,6 +3,7 @@ import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from torch.utils.data import Dataset
 from torchvision import datasets, transforms
+import numpy as np
 
 
 class AlbumentationsCIFAR10Wrapper(Dataset):
