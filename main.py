@@ -158,8 +158,8 @@ def run():
 
     # test_incorrect_pred = {'images': [], 'ground_truths': [], 'predicted_vals': []}
 
-    num_epochs = 4
-    max_lr_epoch = 1
+    num_epochs = 20
+    max_lr_epoch = 5
 
     model = ResNet18().to(device)
     optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-2)  # you can adjust learning rate as needed
@@ -171,8 +171,8 @@ def run():
     #         optimizer,
     #         criterion,
     #         device)
-    LRMAX = 2.54E-04
 
+    LRMAX = 2.54E-04
     print("LRMAX:", LRMAX)
 
     scheduler = optim.lr_scheduler.OneCycleLR(optimizer,
@@ -197,3 +197,4 @@ def run():
         test_acc.append(100. * test_succeeded / len(test_loader.dataset))
         test_losses.append(test_loss)
 
+    return model, device, train_loader, test_loader, train_data, test_data, train_losses, test_losses, train_acc, test_acc, lr_values

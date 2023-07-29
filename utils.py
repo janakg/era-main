@@ -5,7 +5,6 @@ from torch.utils.data import Dataset
 from torchvision import datasets, transforms
 import numpy as np
 
-
 class AlbumentationsCIFAR10Wrapper(Dataset):
     def __init__(self, root='./data', train=True, download=True, transform=None):
         self.data = datasets.CIFAR10(root=root, train=train, download=download)
